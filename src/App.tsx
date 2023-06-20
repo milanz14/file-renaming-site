@@ -18,7 +18,8 @@ function App() {
       <div
         className="drop-zone"
         onDrop={handleDropEvent}
-        onDragOver={handleDragOver}></div>
+        onDragOver={handleDragOver}
+      />
     </div>
   );
 }
