@@ -11,15 +11,13 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <p>
-        Drop files <i>below</i>
-      </p>
-      <div
-        className="drop-zone"
-        onDrop={handleDropEvent}
-        onDragOver={handleDragOver}
-      />
+    <div
+      className="drop-zone"
+      onDrop={handleDropEvent}
+      onDragOver={handleDragOver}>
+      <span className="drop-zone__prompt">
+        Drop items here or <b>click</b> to add...
+      </span>
     </div>
   );
 }
