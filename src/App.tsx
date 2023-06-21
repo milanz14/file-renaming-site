@@ -14,10 +14,8 @@ function App() {
   };
 
   const handleClick = () => {
-    // add type guard to prevent typescript errors
-    if (inputRef.current !== null) {
-      inputRef.current.click();
-    }
+    // non-null assertion
+    inputRef.current!.click();
   };
 
   return (
