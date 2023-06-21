@@ -1,7 +1,6 @@
 #root {
   width: 100dvw;
   height: 100dvh;
-  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,13 +10,18 @@
   border: 2px dashed black;
   min-width: 85%;
   height: 500px;
-  border-radius: 2%;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.file-browser {
+  display: none;
 }
 
 .drop-zone__prompt {
-  min-width: 100%;
-  margin-top: 10%;
+  /*  */
 }
