@@ -28,7 +28,7 @@ function App() {
         Drop items here or <b>click</b> to add...
       </span>
 
-      <input className="file-browser" type="file" ref={inputRef} />
+      <input className="file-browser" type="file" ref={inputRef} multiple />
     </div>
   );
 }
