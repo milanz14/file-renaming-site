@@ -18,6 +18,10 @@ function App() {
     inputRef.current!.click();
   };
 
+  const handleInputChange = (e) => {
+    console.log("input changed... ");
+  };
+
   return (
     <div
       className="drop-zone"
@@ -28,7 +32,13 @@ function App() {
         Drop items here or <b>click</b> to add...
       </span>
 
-      <input className="file-browser" type="file" ref={inputRef} multiple />
+      <input
+        className="file-browser"
+        type="file"
+        ref={inputRef}
+        multiple
+        onChange={handleInputChange}
+      />
     </div>
   );
 }
