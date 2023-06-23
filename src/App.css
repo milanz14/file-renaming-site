@@ -7,7 +7,7 @@
 }
 
 .drop-zone {
-  border: 2px dashed black;
+  border: 2px dashed #009578;
   min-width: 85%;
   height: 500px;
   border-radius: 10px;
