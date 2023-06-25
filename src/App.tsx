@@ -1,16 +1,29 @@
 import "./App.css";
 import { DragEventHandler, useRef, useState } from "react";
 
+// interface FileItemList {
+//   lastModified?: number;
+//   lastModifiedDate?: string;
+//   name?: string;
+//   size?: number;
+//   type?: string;
+//   webkitRelativePath?: string;
+// }
+
 function App() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [isHovering, setIsHovering] = useState<boolean>(false);
+  const [currentFiles, setCurrentFiles] = useState<File[] | null>([]);
 
   const handleDropEvent: DragEventHandler<HTMLDivElement> = (e): void => {
     e.preventDefault();
     // e.stopPropagation();
     // // console.log("file dropped...");
-    console.log(e);
+    if (e.dataTransfer.files.length) {
+      setCurrentFiles([...(currentFiles as File[]), ...e.dataTransfer.files]);
+    }
+    console.log(e.dataTransfer.files);
     setIsHovering(false);
   };
 
@@ -24,39 +37,40 @@ function App() {
     setIsHovering(false);
   };
 
-  const handleClick = () => {
+  const handleOpenClick = () => {
     // non-null assertion
     inputRef.current!.click();
   };
 
-  const handleInputChange = (e: React.FormEvent<HTMLInputElement>): void => {
-    console.log("input changed... ");
-    console.log(e);
-  };
-
   return (
-    <div
-      className={isHovering ? "drop-zone-hover" : "drop-zone"}
-      onDrop={handleDropEvent}
-      onDragOver={handleDragOver}
-      onClick={handleClick}
-      onDragEnd={handleDragLeave}
-      onDragLeave={handleDragLeave}>
-      <span className="drop-zone__prompt">
-        Drop items here or{" "}
-        <em>
-          <b>click</b>
-        </em>{" "}
-        to add...
-      </span>
+    <div className="main-contain">
+      <div
+        className={isHovering ? "drop-zone-hover" : "drop-zone"}
+        onDrop={handleDropEvent}
+        onDragOver={handleDragOver}
+        onClick={handleOpenClick}
+        onDragEnd={handleDragLeave}
+        onDragLeave={handleDragLeave}>
+        <span className="drop-zone__prompt">
+          Drop items here or{" "}
+          <em>
+            <b>click</b>
+          </em>{" "}
+          to add...
+        </span>
 
-      <input
-        className="file-browser"
-        type="file"
-        ref={inputRef}
-        multiple
-        onChange={handleInputChange}
-      />
+        <input className="file-browser" type="file" ref={inputRef} multiple />
+      </div>
+      {currentFiles && (
+        <div>
+          <h3>List of Files Added</h3>
+          <ol>
+            {currentFiles.map((file) => (
+              <li key={file.name}>{file.name}</li>
+            ))}
+          </ol>
+        </div>
+      )}
     </div>
   );
 }
