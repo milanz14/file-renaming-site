@@ -63,7 +63,7 @@ function App() {
       </div>
       {currentFiles && (
         <div>
-          <h3>List of Files Added</h3>
+          <h3 className="title">List of Files Added</h3>
           <ol>
             {currentFiles.map((file) => (
               <li key={file.name}>{file.name}</li>
