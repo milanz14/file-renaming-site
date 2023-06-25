@@ -9,12 +9,13 @@ function App() {
   const handleDropEvent: DragEventHandler<HTMLDivElement> = (e): void => {
     e.preventDefault();
     // e.stopPropagation();
-    // console.log("file dropped...");
+    // // console.log("file dropped...");
     console.log(e);
     setIsHovering(false);
   };
 
-  const handleDragOver = () => {
+  const handleDragOver: DragEventHandler<HTMLDivElement> = (e): void => {
+    e.preventDefault();
     console.log("file dragged over...");
     setIsHovering(true);
   };
@@ -39,6 +40,7 @@ function App() {
       onDrop={handleDropEvent}
       onDragOver={handleDragOver}
       onClick={handleClick}
+      onDragEnd={handleDragLeave}
       onDragLeave={handleDragLeave}>
       <span className="drop-zone__prompt">
         Drop items here or{" "}
