@@ -1,14 +1,9 @@
 import "./App.css";
 import { DragEventHandler, useRef, useState } from "react";
 
-// interface FileItemList {
-//   lastModified?: number;
-//   lastModifiedDate?: string;
-//   name?: string;
-//   size?: number;
-//   type?: string;
-//   webkitRelativePath?: string;
-// }
+import jpg from "./assets/icons/jpg-file.png";
+import pdf from "./assets/icons/pdf.png";
+import txt from "./assets/icons/txt-file.png";
 
 function App() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -16,14 +11,19 @@ function App() {
   const [isHovering, setIsHovering] = useState<boolean>(false);
   const [currentFiles, setCurrentFiles] = useState<File[] | null>([]);
 
+  const fileTypes = {
+    pdf: pdf,
+    jpg: jpg,
+    text: txt,
+  };
+
   const handleDropEvent: DragEventHandler<HTMLDivElement> = (e): void => {
     e.preventDefault();
-    // e.stopPropagation();
-    // // console.log("file dropped...");
+    console.log("file dropped...");
+    console.log(e.dataTransfer.files);
     if (e.dataTransfer.files.length) {
       setCurrentFiles([...(currentFiles as File[]), ...e.dataTransfer.files]);
     }
-    console.log(e.dataTransfer.files);
     setIsHovering(false);
   };
 
@@ -66,7 +66,10 @@ function App() {
           <h3 className="title">List of Files Added</h3>
           <ol>
             {currentFiles.map((file) => (
-              <li key={file.name}>{file.name}</li>
+              <li key={file.name}>
+                <img src={fileTypes.jpg} className="img-control" />
+                {file.name}
+              </li>
             ))}
           </ol>
         </div>
