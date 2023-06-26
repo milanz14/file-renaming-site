@@ -62,23 +62,23 @@ function App() {
       alert("Nothing to convert!");
       return;
     }
-    let updatedFiles = [];
+    let updatedFiles: File[] | null = [];
     for (const file of currentFiles!) {
-      console.log(file);
+      // handle updating file name
       const splitFileName = file.name.split(".");
       splitFileName[1] = selectType;
       const updatedFileName = splitFileName.join(".");
-
+      // handle updating file types
       const splitFileType = file.type.split("/");
       splitFileType[1] = selectType;
       const updatedFileType = splitFileType.join("/");
-
+      // update the file
       const updatedFile = {
         ...file,
         type: updatedFileType,
         name: updatedFileName,
       };
-
+      // store in temp array
       updatedFiles.push(updatedFile);
     }
     setCurrentFiles(updatedFiles);
