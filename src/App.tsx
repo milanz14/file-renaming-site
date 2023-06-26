@@ -62,9 +62,26 @@ function App() {
       alert("Nothing to convert!");
       return;
     }
+    let updatedFiles = [];
     for (const file of currentFiles!) {
-      console.log(file.type);
+      console.log(file);
+      const splitFileName = file.name.split(".");
+      splitFileName[1] = selectType;
+      const updatedFileName = splitFileName.join(".");
+
+      const splitFileType = file.type.split("/");
+      splitFileType[1] = selectType;
+      const updatedFileType = splitFileType.join("/");
+
+      const updatedFile = {
+        ...file,
+        type: updatedFileType,
+        name: updatedFileName,
+      };
+
+      updatedFiles.push(updatedFile);
     }
+    setCurrentFiles(updatedFiles);
   };
 
   return (
