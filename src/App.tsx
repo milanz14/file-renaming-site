@@ -50,6 +50,14 @@ function App() {
     setSelectType(e.target.value);
   };
 
+  const handleInputChange = (): void => {
+    if (inputRef.current?.files?.length) {
+      console.log(inputRef.current.files);
+      setCurrentFiles([...(currentFiles as File[]), ...inputRef.current.files]);
+    }
+    return;
+  };
+
   const convertAndSave = (): void => {
     if (!currentFiles!.length) {
       alert("Nothing to convert!");
@@ -86,7 +94,7 @@ function App() {
   return (
     <div className="main-contain">
       <h1>Extension Converter</h1>
-      <h5>Convert your image files with the click of a button.</h5>
+      <h5>Convert your image files extensions with the click of a button.</h5>
       <div
         className={isHovering ? "drop-zone-hover" : "drop-zone"}
         onDrop={handleDropEvent}
@@ -102,7 +110,13 @@ function App() {
           to add...
         </span>
 
-        <input className="file-browser" type="file" ref={inputRef} multiple />
+        <input
+          className="file-browser"
+          type="file"
+          ref={inputRef}
+          multiple
+          onChange={handleInputChange}
+        />
       </div>
       {currentFiles && (
         <div>
