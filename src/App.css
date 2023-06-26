@@ -100,10 +100,6 @@
   width: 40%;
 }
 
-a {
-  display: none;
-}
-
 @media (max-width: 571px) {
   .header-button-container {
     flex-direction: column;
