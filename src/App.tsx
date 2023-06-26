@@ -5,6 +5,7 @@ import jpg from "./assets/icons/jpg-file.png";
 import pdf from "./assets/icons/pdf.png";
 import txt from "./assets/icons/txt-file.png";
 import img from "./assets/icons/img.png";
+import del from "./assets/icons/delete.png";
 
 function App() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -19,6 +20,7 @@ function App() {
     jpg: jpg,
     text: txt,
     img: img,
+    del: del,
   };
 
   const allOptions = ["jpg", "webp", "png", "gif", "tiff", "pdf", "psd", "eps"];
@@ -145,9 +147,10 @@ function App() {
           </div>
           <ol>
             {currentFiles.map((file) => (
-              <li key={file.name}>
+              <li key={file.name} className="list-item">
                 <img src={fileTypes.img} className="img-control" />
                 {file.name}
+                <img src={fileTypes.del} className="img-control float-right" />
               </li>
             ))}
           </ol>

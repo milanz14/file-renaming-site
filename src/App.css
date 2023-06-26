@@ -76,6 +76,19 @@
   text-align: center;
 }
 
+.list-item {
+  position: relative;
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.float-right {
+  position: absolute;
+  right: 0;
+}
+
 .btn {
   color: white;
   background-color: #009578;
