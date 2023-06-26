@@ -4,6 +4,7 @@ import { DragEventHandler, useRef, useState } from "react";
 import jpg from "./assets/icons/jpg-file.png";
 import pdf from "./assets/icons/pdf.png";
 import txt from "./assets/icons/txt-file.png";
+import img from "./assets/icons/img.png";
 
 function App() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -15,6 +16,7 @@ function App() {
     pdf: pdf,
     jpg: jpg,
     text: txt,
+    img: img,
   };
 
   const allOptions = ["jpg", "webp", "png", "gif", "tiff", "pdf", "psd", "eps"];
@@ -27,7 +29,6 @@ function App() {
 
   const handleDropEvent: DragEventHandler<HTMLDivElement> = (e): void => {
     e.preventDefault();
-    console.log("file dropped...");
     console.log(e.dataTransfer.files);
     if (e.dataTransfer.files.length) {
       determineFileTypes(e.dataTransfer.files);
@@ -80,11 +81,10 @@ function App() {
         <div>
           <div className="header-button-container">
             <h3 className="title">Files to be converted</h3>
-            <label>Convert to:</label>
             <select className="select">
               {allOptions.map((option) => (
                 <option value={option} key={option}>
-                  {option.toUpperCase()}
+                  To: {option.toUpperCase()}
                 </option>
               ))}
             </select>
@@ -95,7 +95,7 @@ function App() {
           <ol>
             {currentFiles.map((file) => (
               <li key={file.name}>
-                <img src={fileTypes.jpg} className="img-control" />
+                <img src={fileTypes.img} className="img-control" />
                 {file.name}
               </li>
             ))}

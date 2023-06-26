@@ -54,7 +54,7 @@
 }
 
 .img-control {
-  max-height: 25px;
+  max-height: 35px;
   margin-right: 10px;
 }
 
@@ -66,14 +66,20 @@
 }
 
 .select {
-  height: 100%;
-  width: 150px;
+  height: 40px;
+  width: 175px;
   appearance: none;
+  cursor: pointer;
+  background-color: #009578;
+  color: white;
+  border-radius: 8px;
+  text-align: center;
 }
 
 .btn {
   color: white;
   background-color: #009578;
+  width: 40%;
 }
 
 @media (max-width: 571px) {
@@ -83,5 +89,10 @@
   .select {
     margin-top: 5px;
     margin-bottom: 5px;
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
   }
 }
