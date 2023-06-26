@@ -22,17 +22,10 @@ function App() {
 
   const allOptions = ["jpg", "webp", "png", "gif", "tiff", "pdf", "psd", "eps"];
 
-  const determineFileTypes = (files: FileList) => {
-    for (const file of files) {
-      return file;
-    }
-  };
-
   const handleDropEvent: DragEventHandler<HTMLDivElement> = (e): void => {
     e.preventDefault();
     console.log(e.dataTransfer.files);
     if (e.dataTransfer.files.length) {
-      determineFileTypes(e.dataTransfer.files);
       setCurrentFiles([...(currentFiles as File[]), ...e.dataTransfer.files]);
     }
     setIsHovering(false);
