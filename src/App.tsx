@@ -82,6 +82,12 @@ function App() {
       updatedFiles.push(updatedFile);
     }
     setCurrentFiles(updatedFiles);
+
+    downloadAllConvertedFiles();
+  };
+
+  const downloadAllConvertedFiles = () => {
+    console.log("Download initiated...");
   };
 
   return (
