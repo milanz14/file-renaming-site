@@ -8,6 +8,7 @@ import img from "./assets/icons/img.png";
 
 function App() {
   const inputRef = useRef<HTMLInputElement>(null);
+  const linkRef = useRef<HTMLAnchorElement>(null);
 
   const [isHovering, setIsHovering] = useState<boolean>(false);
   const [currentFiles, setCurrentFiles] = useState<File[] | null>([]);
@@ -89,6 +90,12 @@ function App() {
 
   const downloadAllConvertedFiles = () => {
     console.log("Download initiated...");
+    console.log(currentFiles);
+    for (const file of currentFiles!) {
+      let objectURL = URL.createObjectURL(file);
+      linkRef.current!.href = objectURL;
+      linkRef.current!.click();
+    }
   };
 
   return (
