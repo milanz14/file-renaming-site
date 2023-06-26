@@ -11,6 +11,7 @@ function App() {
 
   const [isHovering, setIsHovering] = useState<boolean>(false);
   const [currentFiles, setCurrentFiles] = useState<File[] | null>([]);
+  const [selectType, setSelectType] = useState<string>("jpg");
 
   const fileTypes = {
     pdf: pdf,
@@ -52,8 +53,18 @@ function App() {
     inputRef.current!.click();
   };
 
-  const convertAndSave = () => {
-    console.log("convert button clicked - files converted - saved");
+  const handleSelectType = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+    setSelectType(e.target.value);
+  };
+
+  const convertAndSave = (): void => {
+    if (!currentFiles!.length) {
+      alert("Nothing to convert!");
+      return;
+    }
+    for (const file of currentFiles!) {
+      console.log(file.type);
+    }
   };
 
   return (
@@ -81,7 +92,10 @@ function App() {
         <div>
           <div className="header-button-container">
             <h3 className="title">Files to be converted</h3>
-            <select className="select">
+            <select
+              className="select"
+              onChange={handleSelectType}
+              value={selectType}>
               {allOptions.map((option) => (
                 <option value={option} key={option}>
                   To: {option.toUpperCase()}
