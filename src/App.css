@@ -76,6 +76,10 @@
   text-align: center;
 }
 
+.ul {
+  padding: 0;
+}
+
 .list-item {
   position: relative;
   display: flex;
@@ -84,9 +88,10 @@
   margin-bottom: 4px;
 }
 
-.float-right {
+.delete-btn {
   position: absolute;
   right: 0;
+  cursor: pointer;
 }
 
 .btn {

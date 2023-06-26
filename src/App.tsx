@@ -61,6 +61,14 @@ function App() {
     return;
   };
 
+  const handleDeleteClick = (file: File): void => {
+    console.log(currentFiles);
+    const filteredFiles = currentFiles?.filter(
+      (currentFile) => currentFile !== file
+    );
+    setCurrentFiles(filteredFiles as File[]);
+  };
+
   const convertAndSave = (): void => {
     if (!currentFiles!.length) {
       alert("Nothing to convert!");
@@ -145,15 +153,19 @@ function App() {
               Convert and Save
             </button>
           </div>
-          <ol>
+          <ul className="ul">
             {currentFiles.map((file) => (
               <li key={file.name} className="list-item">
-                <img src={fileTypes.img} className="img-control" />
+                <img src={fileTypes.img} className="img-control img-name" />
                 {file.name}
-                <img src={fileTypes.del} className="img-control float-right" />
+                <img
+                  src={fileTypes.del}
+                  className="img-control delete-btn"
+                  onClick={(file) => handleDeleteClick(file.name)}
+                />
               </li>
             ))}
-          </ol>
+          </ul>
         </div>
       )}
     </div>
