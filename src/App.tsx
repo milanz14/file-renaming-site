@@ -6,6 +6,7 @@ import pdf from "./assets/icons/pdf.png";
 import txt from "./assets/icons/txt-file.png";
 import img from "./assets/icons/img.png";
 import del from "./assets/icons/delete.png";
+import FileDownload from "./components/FileDownload";
 
 function App() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -14,6 +15,7 @@ function App() {
   const [isHovering, setIsHovering] = useState<boolean>(false);
   const [currentFiles, setCurrentFiles] = useState<File[] | null>([]);
   const [selectType, setSelectType] = useState<string>("jpg");
+  const [clickValidity, setClickValidity] = useState<boolean>(false);
 
   const fileTypes = {
     pdf: pdf,
@@ -75,6 +77,7 @@ function App() {
       return;
     }
     let updatedFiles: File[] | null = [];
+    setClickValidity(true);
     for (const file of currentFiles!) {
       // handle updating file name
       const splitFileName = file.name.split(".");
@@ -85,28 +88,25 @@ function App() {
       splitFileType[1] = selectType;
       const updatedFileType = splitFileType.join("/");
       // update the file
-      const updatedFile = {
-        ...file,
+      const updatedFile = new File([file], `${updatedFileName}`, {
         type: updatedFileType,
-        name: updatedFileName,
-      };
+      });
       // store in temp array
       updatedFiles.push(updatedFile);
     }
     setCurrentFiles(updatedFiles);
 
-    downloadAllConvertedFiles();
+    // downloadAllConvertedFiles();
   };
 
-  const downloadAllConvertedFiles = () => {
-    console.log("Download initiated...");
-    console.log(currentFiles);
-    for (const file of currentFiles!) {
-      let objectURL = URL.createObjectURL(file);
-      linkRef.current!.href = objectURL;
-      linkRef.current!.click();
-    }
-  };
+  // const downloadAllConvertedFiles = () => {
+  //   console.log("Download initiated...");
+  //   // for (const file of currentFiles!) {
+  //   //   let objectURL = URL.createObjectURL(file);
+  //   //   linkRef.current!.href = objectURL;
+  //   //   linkRef.current!.click();
+  //   // }
+  // };
 
   return (
     <div className="main-contain">
@@ -158,11 +158,12 @@ function App() {
               <li key={file.name} className="list-item">
                 <img src={fileTypes.img} className="img-control img-name" />
                 {file.name}
-                <img
+                <FileDownload file={file} validity={clickValidity} />
+                {/* <img
                   src={fileTypes.del}
                   className="img-control delete-btn"
                   onClick={(file) => handleDeleteClick(file.name)}
-                />
+                /> */}
               </li>
             ))}
           </ul>
