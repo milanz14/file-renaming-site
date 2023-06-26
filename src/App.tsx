@@ -17,11 +17,20 @@ function App() {
     text: txt,
   };
 
+  const allOptions = ["jpg", "webp", "png", "gif", "tiff", "pdf", "psd", "eps"];
+
+  const determineFileTypes = (files: FileList) => {
+    for (const file of files) {
+      return file;
+    }
+  };
+
   const handleDropEvent: DragEventHandler<HTMLDivElement> = (e): void => {
     e.preventDefault();
     console.log("file dropped...");
     console.log(e.dataTransfer.files);
     if (e.dataTransfer.files.length) {
+      determineFileTypes(e.dataTransfer.files);
       setCurrentFiles([...(currentFiles as File[]), ...e.dataTransfer.files]);
     }
     setIsHovering(false);
@@ -42,8 +51,14 @@ function App() {
     inputRef.current!.click();
   };
 
+  const convertAndSave = () => {
+    console.log("convert button clicked - files converted - saved");
+  };
+
   return (
     <div className="main-contain">
+      <h1>Extension Converter</h1>
+      <h5>Convert your image files with the click of a button.</h5>
       <div
         className={isHovering ? "drop-zone-hover" : "drop-zone"}
         onDrop={handleDropEvent}
@@ -63,7 +78,20 @@ function App() {
       </div>
       {currentFiles && (
         <div>
-          <h3 className="title">List of Files Added</h3>
+          <div className="header-button-container">
+            <h3 className="title">Files to be converted</h3>
+            <label>Convert to:</label>
+            <select className="select">
+              {allOptions.map((option) => (
+                <option value={option} key={option}>
+                  {option.toUpperCase()}
+                </option>
+              ))}
+            </select>
+            <button className="btn" onClick={convertAndSave}>
+              Convert and Save
+            </button>
+          </div>
           <ol>
             {currentFiles.map((file) => (
               <li key={file.name}>
