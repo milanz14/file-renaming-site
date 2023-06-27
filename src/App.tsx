@@ -15,7 +15,7 @@ function App() {
   const [isHovering, setIsHovering] = useState<boolean>(false);
   const [currentFiles, setCurrentFiles] = useState<File[] | null>([]);
   const [selectType, setSelectType] = useState<string>("jpg");
-  const [clickValidity, setClickValidity] = useState<boolean>(false);
+  const [shouldBeDownloaded, setShouldBeDownloaded] = useState<boolean>(false);
 
   const fileTypes = {
     pdf: pdf,
@@ -72,12 +72,12 @@ function App() {
   };
 
   const convertAndSave = (): void => {
+    setShouldBeDownloaded(true);
     if (!currentFiles!.length) {
       alert("Nothing to convert!");
       return;
     }
     let updatedFiles: File[] | null = [];
-    setClickValidity(true);
     for (const file of currentFiles!) {
       // handle updating file name
       const splitFileName = file.name.split(".");
@@ -95,6 +95,7 @@ function App() {
       updatedFiles.push(updatedFile);
     }
     setCurrentFiles(updatedFiles);
+    // setShouldBeDownloaded(false);
   };
 
   return (
@@ -147,7 +148,10 @@ function App() {
               <li key={file.name} className="list-item">
                 <img src={fileTypes.img} className="img-control img-name" />
                 {file.name}
-                <FileDownload file={file} validity={clickValidity} />
+                <FileDownload
+                  file={file}
+                  shouldBeDownloaded={shouldBeDownloaded}
+                />
                 {/* <img
                   src={fileTypes.del}
                   className="img-control delete-btn"
