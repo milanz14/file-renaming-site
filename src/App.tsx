@@ -95,18 +95,7 @@ function App() {
       updatedFiles.push(updatedFile);
     }
     setCurrentFiles(updatedFiles);
-
-    // downloadAllConvertedFiles();
   };
-
-  // const downloadAllConvertedFiles = () => {
-  //   console.log("Download initiated...");
-  //   // for (const file of currentFiles!) {
-  //   //   let objectURL = URL.createObjectURL(file);
-  //   //   linkRef.current!.href = objectURL;
-  //   //   linkRef.current!.click();
-  //   // }
-  // };
 
   return (
     <div className="main-contain">
