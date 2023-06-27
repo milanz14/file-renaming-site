@@ -76,6 +76,24 @@
   text-align: center;
 }
 
+.ul {
+  padding: 0;
+}
+
+.list-item {
+  position: relative;
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.delete-btn {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+
 .btn {
   color: white;
   background-color: #009578;

@@ -5,6 +5,8 @@ import jpg from "./assets/icons/jpg-file.png";
 import pdf from "./assets/icons/pdf.png";
 import txt from "./assets/icons/txt-file.png";
 import img from "./assets/icons/img.png";
+import del from "./assets/icons/delete.png";
+import FileDownload from "./components/FileDownload";
 
 function App() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -13,12 +15,14 @@ function App() {
   const [isHovering, setIsHovering] = useState<boolean>(false);
   const [currentFiles, setCurrentFiles] = useState<File[] | null>([]);
   const [selectType, setSelectType] = useState<string>("jpg");
+  const [shouldBeDownloaded, setShouldBeDownloaded] = useState<boolean>(false);
 
   const fileTypes = {
     pdf: pdf,
     jpg: jpg,
     text: txt,
     img: img,
+    del: del,
   };
 
   const allOptions = ["jpg", "webp", "png", "gif", "tiff", "pdf", "psd", "eps"];
@@ -59,7 +63,16 @@ function App() {
     return;
   };
 
+  const handleDeleteClick = (file: File): void => {
+    console.log(currentFiles);
+    const filteredFiles = currentFiles?.filter(
+      (currentFile) => currentFile !== file
+    );
+    setCurrentFiles(filteredFiles as File[]);
+  };
+
   const convertAndSave = (): void => {
+    setShouldBeDownloaded(true);
     if (!currentFiles!.length) {
       alert("Nothing to convert!");
       return;
@@ -75,27 +88,13 @@ function App() {
       splitFileType[1] = selectType;
       const updatedFileType = splitFileType.join("/");
       // update the file
-      const updatedFile = {
-        ...file,
+      const updatedFile = new File([file], `${updatedFileName}`, {
         type: updatedFileType,
-        name: updatedFileName,
-      };
+      });
       // store in temp array
       updatedFiles.push(updatedFile);
     }
     setCurrentFiles(updatedFiles);
-
-    downloadAllConvertedFiles();
-  };
-
-  const downloadAllConvertedFiles = () => {
-    console.log("Download initiated...");
-    console.log(currentFiles);
-    for (const file of currentFiles!) {
-      let objectURL = URL.createObjectURL(file);
-      linkRef.current!.href = objectURL;
-      linkRef.current!.click();
-    }
   };
 
   return (
@@ -143,14 +142,24 @@ function App() {
               Convert and Save
             </button>
           </div>
-          <ol>
+          <ul className="ul">
             {currentFiles.map((file) => (
-              <li key={file.name}>
-                <img src={fileTypes.img} className="img-control" />
+              <li key={file.name} className="list-item">
+                <img src={fileTypes.img} className="img-control img-name" />
                 {file.name}
+                <FileDownload
+                  file={file}
+                  shouldBeDownloaded={shouldBeDownloaded}
+                  setShouldBeDownloaded={setShouldBeDownloaded}
+                />
+                {/* <img
+                  src={fileTypes.del}
+                  className="img-control delete-btn"
+                  onClick={(file) => handleDeleteClick(file.name)}
+                /> */}
               </li>
             ))}
-          </ol>
+          </ul>
         </div>
       )}
     </div>
