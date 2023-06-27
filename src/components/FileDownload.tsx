@@ -1,9 +1,10 @@
 import { useRef, useEffect, useState } from "react";
 
-const FileDownload: React.FC<{ file: File; shouldBeDownloaded: boolean }> = ({
-  file,
-  shouldBeDownloaded,
-}) => {
+const FileDownload: React.FC<{
+  file: File;
+  shouldBeDownloaded: boolean;
+  setShouldBeDownloaded: (arg: boolean) => void;
+}> = ({ file, shouldBeDownloaded, setShouldBeDownloaded }) => {
   const downloadLinkRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
@@ -13,6 +14,7 @@ const FileDownload: React.FC<{ file: File; shouldBeDownloaded: boolean }> = ({
       downloadLinkRef.current!.download = file.name;
       downloadLinkRef.current!.click();
     }
+    setShouldBeDownloaded(false);
   }, [file, shouldBeDownloaded]);
 
   return <a ref={downloadLinkRef} style={{ display: "none" }} />;

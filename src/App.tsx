@@ -95,7 +95,6 @@ function App() {
       updatedFiles.push(updatedFile);
     }
     setCurrentFiles(updatedFiles);
-    // setShouldBeDownloaded(false);
   };
 
   return (
@@ -151,6 +150,7 @@ function App() {
                 <FileDownload
                   file={file}
                   shouldBeDownloaded={shouldBeDownloaded}
+                  setShouldBeDownloaded={setShouldBeDownloaded}
                 />
                 {/* <img
                   src={fileTypes.del}
