@@ -10,7 +10,6 @@ import FileDownload from "./components/FileDownload";
 
 function App() {
   const inputRef = useRef<HTMLInputElement>(null);
-  const linkRef = useRef<HTMLAnchorElement>(null);
 
   const [isHovering, setIsHovering] = useState<boolean>(false);
   const [currentFiles, setCurrentFiles] = useState<File[] | null>([]);
