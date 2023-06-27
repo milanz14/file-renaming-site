@@ -25,7 +25,17 @@ function App() {
     del: del,
   };
 
-  const allOptions = ["jpg", "webp", "png", "gif", "tiff", "pdf", "psd", "eps"];
+  const allOptions = [
+    "jpg",
+    "webp",
+    "png",
+    "gif",
+    "tiff",
+    "pdf",
+    "psd",
+    "eps",
+    "raw",
+  ];
 
   const handleDropEvent: DragEventHandler<HTMLDivElement> = (e): void => {
     e.preventDefault();
