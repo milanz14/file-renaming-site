@@ -2,6 +2,10 @@
 
 - Web based tool for quickly renaming extensions for batch files
 
+### Deployment
+
+- [file-renaming-site](https://file-renaming-site.netlify.app/)
+
 ### Tech
 
 - [React](https://react.dev/)
